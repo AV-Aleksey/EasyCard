@@ -17,9 +17,5 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'email@mail.com', description: 'Почта' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: '123', description: 'Пароль' }),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "password", void 0);
 exports.CreateUserDto = CreateUserDto;
 //# sourceMappingURL=create-user.dto.js.map

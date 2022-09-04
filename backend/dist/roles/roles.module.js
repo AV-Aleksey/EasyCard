@@ -22,6 +22,9 @@ RolesModule = __decorate([
         providers: [roles_service_1.RolesService],
         imports: [
             sequelize_1.SequelizeModule.forFeature([roles_model_1.Role, users_model_1.User, user_roles_model_1.UserRoles])
+        ],
+        exports: [
+            roles_service_1.RolesService
         ]
     })
 ], RolesModule);

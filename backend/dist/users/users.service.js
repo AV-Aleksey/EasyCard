@@ -16,23 +16,27 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const users_model_1 = require("./users.model");
 const sequelize_1 = require("@nestjs/sequelize");
+const roles_service_1 = require("../roles/roles.service");
 let UsersService = class UsersService {
-    constructor(userRepository) {
+    constructor(userRepository, roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
     async createUser(dto) {
         const user = await this.userRepository.create(dto);
+        const role = await this.roleService.getRoleByValue("user");
+        await user.$set('roles', [role.id]);
         return user;
     }
     async getAllUsers() {
-        const users = await this.userRepository.findAll();
+        const users = await this.userRepository.findAll({ include: { all: true } });
         return users;
     }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, sequelize_1.InjectModel)(users_model_1.User)),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [Object, roles_service_1.RolesService])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

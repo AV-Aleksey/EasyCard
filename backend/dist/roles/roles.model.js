@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Role.prototype, "user", void 0);
 Role = __decorate([
-    (0, sequelize_typescript_1.Table)({ tableName: 'roles' })
+    (0, sequelize_typescript_1.Table)({ tableName: 'roles', updatedAt: false, createdAt: false })
 ], Role);
 exports.Role = Role;
 //# sourceMappingURL=roles.model.js.map

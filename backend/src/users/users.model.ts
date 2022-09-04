@@ -32,7 +32,7 @@ export class User extends Model<User, UserCreationAttrs> {
     email: string;
 
     @ApiProperty({ example: '1234', description: 'Пароль' })
-    @Column({ type: DataType.STRING, unique: false, allowNull: false })
+    @Column({ type: DataType.STRING, allowNull: false })
     password: string;
 
     /**@todo показатели бана нужно вынести в отдельную таблицу*/

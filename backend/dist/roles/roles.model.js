@@ -9,42 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Role = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 const swagger_1 = require("@nestjs/swagger");
-const roles_model_1 = require("../roles/roles.model");
-const user_roles_model_1 = require("../roles/user-roles.model");
-let User = class User extends sequelize_typescript_1.Model {
+const users_model_1 = require("../users/users.model");
+const user_roles_model_1 = require("./user-roles.model");
+let Role = class Role extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, swagger_1.ApiProperty)({ example: '1', description: 'Идентификатор' }),
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true }),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], Role.prototype, "id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'email@gmail.com', description: 'Почтовый адрес' }),
+    (0, swagger_1.ApiProperty)({ example: 'ADMIN/USER', description: 'Значение роли пользователя' }),
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, unique: true, allowNull: false }),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], Role.prototype, "value", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '1234', description: 'Пароль' }),
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, unique: false, allowNull: false }),
+    (0, swagger_1.ApiProperty)({ example: 'Права: CRUD', description: 'Описание роли' }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
     __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], Role.prototype, "description", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.BOOLEAN, defaultValue: false }),
-    __metadata("design:type", Boolean)
-], User.prototype, "banned", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: true }),
-    __metadata("design:type", String)
-], User.prototype, "banReason", void 0);
-__decorate([
-    (0, sequelize_typescript_1.BelongsToMany)(() => roles_model_1.Role, () => user_roles_model_1.UserRoles),
+    (0, sequelize_typescript_1.BelongsToMany)(() => users_model_1.User, () => user_roles_model_1.UserRoles),
     __metadata("design:type", Array)
-], User.prototype, "roles", void 0);
-User = __decorate([
-    (0, sequelize_typescript_1.Table)({ tableName: 'users' })
-], User);
-exports.User = User;
-//# sourceMappingURL=users.model.js.map
+], Role.prototype, "user", void 0);
+Role = __decorate([
+    (0, sequelize_typescript_1.Table)({ tableName: 'roles' })
+], Role);
+exports.Role = Role;
+//# sourceMappingURL=roles.model.js.map

@@ -26,11 +26,27 @@ let UsersService = class UsersService {
         const user = await this.userRepository.create(dto);
         const role = await this.roleService.getRoleByValue("user");
         await user.$set('roles', [role.id]);
+        user.roles = [role];
         return user;
     }
     async getAllUsers() {
-        const users = await this.userRepository.findAll({ include: { all: true } });
+        const users = await this.userRepository.findAll({
+            include: {
+                all: true
+            }
+        });
         return users;
+    }
+    async getUsersByEmail(email) {
+        const user = await this.userRepository.findOne({
+            where: {
+                email
+            },
+            include: {
+                all: true
+            }
+        });
+        return user;
     }
 };
 UsersService = __decorate([

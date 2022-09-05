@@ -22,6 +22,7 @@ import { RolesModule } from "../roles/roles.module";
         SequelizeModule.forFeature([User, Role, UserRoles]),
         /**Модуль можно импортировать в другой модуль но что бы воспользоваться сервисом нужно указать в imports: [] экспортируемый сервис*/
         RolesModule
-    ]
+    ],
+    exports: [UsersService]
 })
 export class UsersModule {}

@@ -3,11 +3,10 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./users.service";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import { User } from "./users.model";
-import {JwtAuthGuard} from "../auth/jwt-auth.guard";
-import {Roles} from "../auth/roles-auth.decorator";
-import {RolesGuard} from "../auth/roles.guard";
-import {BanUserDto} from "./dto/ban.user.dto";
-import {ValidatorPipe} from "../pipes/validator.pipe";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { RolesGuard } from "../auth/roles.guard";
+import { BanUserDto } from "./dto/ban.user.dto";
+import { ValidatorPipe } from "../pipes/validator.pipe";
 
 
 /**
@@ -18,6 +17,7 @@ import {ValidatorPipe} from "../pipes/validator.pipe";
  * */
 
 @ApiTags('Пользователи')
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService ) {}
@@ -32,10 +32,9 @@ export class UsersController {
     }
 
 
+    // @UseGuards(RolesGuard)
     @ApiOperation({ summary: 'Получение пользователей' })
     @ApiResponse({ status: 200, type: [User] })
-    @UseGuards(RolesGuard)
-    @UseGuards(JwtAuthGuard)
     @Get()
     getAll() {
         return this.usersService.getAllUsers()

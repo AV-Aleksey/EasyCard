@@ -14,6 +14,7 @@ const sequelize_1 = require("@nestjs/sequelize");
 const roles_model_1 = require("./roles.model");
 const users_model_1 = require("../users/users.model");
 const user_roles_model_1 = require("./user-roles.model");
+const auth_module_1 = require("../auth/auth.module");
 let RolesModule = class RolesModule {
 };
 RolesModule = __decorate([
@@ -21,7 +22,8 @@ RolesModule = __decorate([
         controllers: [roles_controller_1.RolesController],
         providers: [roles_service_1.RolesService],
         imports: [
-            sequelize_1.SequelizeModule.forFeature([roles_model_1.Role, users_model_1.User, user_roles_model_1.UserRoles])
+            sequelize_1.SequelizeModule.forFeature([roles_model_1.Role, users_model_1.User, user_roles_model_1.UserRoles]),
+            auth_module_1.AuthModule
         ],
         exports: [
             roles_service_1.RolesService

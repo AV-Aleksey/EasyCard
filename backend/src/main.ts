@@ -28,7 +28,7 @@ async function start() {
   /**@description глобальные гварды*/
   // app.useGlobalGuards([new JwtAuthGuard()]);
   /**@description глобальные гварды*/
-  app.useGlobalPipes(new ValidatorPipe())
+  // app.useGlobalPipes(new ValidatorPipe())
 
 
   await app.listen(PORT, () => console.log(`SERVER STARTED ON PORT ${PORT}`))

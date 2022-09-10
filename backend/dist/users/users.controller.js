@@ -19,7 +19,6 @@ const users_service_1 = require("./users.service");
 const swagger_1 = require("@nestjs/swagger");
 const users_model_1 = require("./users.model");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
-const roles_guard_1 = require("../auth/roles.guard");
 const ban_user_dto_1 = require("./dto/ban.user.dto");
 const validator_pipe_1 = require("../pipes/validator.pipe");
 let UsersController = class UsersController {
@@ -49,8 +48,6 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Получение пользователей' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: [users_model_1.User] }),
-    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -67,6 +64,7 @@ __decorate([
 ], UsersController.prototype, "banUser", null);
 UsersController = __decorate([
     (0, swagger_1.ApiTags)('Пользователи'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);

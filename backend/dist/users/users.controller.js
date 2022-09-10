@@ -19,6 +19,9 @@ const users_service_1 = require("./users.service");
 const swagger_1 = require("@nestjs/swagger");
 const users_model_1 = require("./users.model");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const roles_guard_1 = require("../auth/roles.guard");
+const ban_user_dto_1 = require("./dto/ban.user.dto");
+const validator_pipe_1 = require("../pipes/validator.pipe");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -29,10 +32,14 @@ let UsersController = class UsersController {
     getAll() {
         return this.usersService.getAllUsers();
     }
+    async banUser(dto) {
+        return this.usersService.setBanStatus(dto);
+    }
 };
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Создание пользователя' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: users_model_1.User }),
+    (0, common_1.UsePipes)(validator_pipe_1.ValidatorPipe),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -42,12 +49,22 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Получение пользователей' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: [users_model_1.User] }),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "getAll", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Бан пользователя' }),
+    (0, swagger_1.ApiResponse)({ status: 200, type: users_model_1.User }),
+    (0, common_1.Put)('/ban'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [ban_user_dto_1.BanUserDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "banUser", null);
 UsersController = __decorate([
     (0, swagger_1.ApiTags)('Пользователи'),
     (0, common_1.Controller)('users'),

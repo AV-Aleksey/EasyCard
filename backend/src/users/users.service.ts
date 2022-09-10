@@ -4,6 +4,7 @@ import { Role } from '../roles/roles.model';
 import { InjectModel } from "@nestjs/sequelize";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { RolesService } from "../roles/roles.service";
+import {BanUserDto} from "./dto/ban.user.dto";
 
 /**
  * @description
@@ -51,6 +52,15 @@ export class UsersService {
                 all: true
             }
         });
+        return user;
+    }
+
+    async setBanStatus(dto: BanUserDto) {
+        const user = await this.userRepository.findByPk(dto.userId);
+        user.banned = dto.status;
+
+        await user.save();
+
         return user;
     }
 }

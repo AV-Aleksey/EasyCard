@@ -48,6 +48,12 @@ let UsersService = class UsersService {
         });
         return user;
     }
+    async setBanStatus(dto) {
+        const user = await this.userRepository.findByPk(dto.userId);
+        user.banned = dto.status;
+        await user.save();
+        return user;
+    }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

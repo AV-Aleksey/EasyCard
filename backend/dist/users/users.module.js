@@ -16,6 +16,7 @@ const user_roles_model_1 = require("../roles/user-roles.model");
 const roles_model_1 = require("../roles/roles.model");
 const roles_module_1 = require("../roles/roles.module");
 const auth_module_1 = require("../auth/auth.module");
+const decks_model_1 = require("../decks/decks.model");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
@@ -23,7 +24,7 @@ UsersModule = __decorate([
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService],
         imports: [
-            sequelize_1.SequelizeModule.forFeature([users_model_1.User, roles_model_1.Role, user_roles_model_1.UserRoles]),
+            sequelize_1.SequelizeModule.forFeature([users_model_1.User, roles_model_1.Role, user_roles_model_1.UserRoles, decks_model_1.Deck]),
             roles_module_1.RolesModule,
             (0, common_1.forwardRef)(() => auth_module_1.AuthModule),
         ],

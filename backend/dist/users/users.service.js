@@ -17,13 +17,15 @@ const common_1 = require("@nestjs/common");
 const users_model_1 = require("./users.model");
 const sequelize_1 = require("@nestjs/sequelize");
 const roles_service_1 = require("../roles/roles.service");
+const bcrypt = require("bcryptjs");
 let UsersService = class UsersService {
     constructor(userRepository, roleService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
     }
     async createUser(dto) {
-        const user = await this.userRepository.create(dto);
+        const hashPass = await bcrypt.hash(dto.password, 5);
+        const user = await this.userRepository.create(Object.assign(Object.assign({}, dto), { password: hashPass }));
         const role = await this.roleService.getRoleByValue("user");
         await user.$set('roles', [role.id]);
         user.roles = [role];

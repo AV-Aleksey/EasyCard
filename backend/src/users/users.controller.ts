@@ -46,8 +46,4 @@ export class UsersController {
     async banUser(@Body() dto: BanUserDto) {
         return this.usersService.setBanStatus(dto)
     }
-
-
-
-
 }

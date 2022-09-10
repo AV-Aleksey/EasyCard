@@ -7,6 +7,8 @@ import { RolesModule } from "./roles/roles.module";
 import { Role } from "./roles/roles.model";
 import { UserRoles } from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
+import { DecksModule } from './decks/decks.module';
+import {Deck} from "./decks/decks.model";
 
 /**@description модуль консалидирует все*/
 @Module({
@@ -23,12 +25,14 @@ import { AuthModule } from './auth/auth.module';
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Role, UserRoles],
-            autoLoadModels: true
+            models: [User, Role, UserRoles, Deck],
+            autoLoadModels: true,
+            synchronize: true,
         }),
         UsersModule,
         RolesModule,
-        AuthModule
+        AuthModule,
+        DecksModule
     ]
 })
 export class AppModule {

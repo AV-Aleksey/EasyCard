@@ -16,6 +16,8 @@ const roles_module_1 = require("./roles/roles.module");
 const roles_model_1 = require("./roles/roles.model");
 const user_roles_model_1 = require("./roles/user-roles.model");
 const auth_module_1 = require("./auth/auth.module");
+const decks_module_1 = require("./decks/decks.module");
+const decks_model_1 = require("./decks/decks.model");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -33,12 +35,14 @@ AppModule = __decorate([
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
-                models: [users_model_1.User, roles_model_1.Role, user_roles_model_1.UserRoles],
-                autoLoadModels: true
+                models: [users_model_1.User, roles_model_1.Role, user_roles_model_1.UserRoles, decks_model_1.Deck],
+                autoLoadModels: true,
+                synchronize: true,
             }),
             users_module_1.UsersModule,
             roles_module_1.RolesModule,
-            auth_module_1.AuthModule
+            auth_module_1.AuthModule,
+            decks_module_1.DecksModule
         ]
     })
 ], AppModule);

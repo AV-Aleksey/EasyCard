@@ -9,21 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateDeckDto = void 0;
+exports.DeckDeleteDto = void 0;
 const class_validator_1 = require("class-validator");
-class CreateDeckDto {
+class DeckDeleteDto {
 }
-__decorate([
-    (0, class_validator_1.IsString)({ message: 'Должно быть строкой' }),
-    __metadata("design:type", String)
-], CreateDeckDto.prototype, "name", void 0);
-__decorate([
-    (0, class_validator_1.IsString)({ message: 'Должно быть строкой' }),
-    __metadata("design:type", String)
-], CreateDeckDto.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], CreateDeckDto.prototype, "userId", void 0);
-exports.CreateDeckDto = CreateDeckDto;
-//# sourceMappingURL=create-deck.dto.js.map
+], DeckDeleteDto.prototype, "id", void 0);
+exports.DeckDeleteDto = DeckDeleteDto;
+//# sourceMappingURL=deck-delete.dto.js.map

@@ -14,25 +14,61 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DecksController = void 0;
 const common_1 = require("@nestjs/common");
-const swagger_1 = require("@nestjs/swagger");
-const create_deck_dto_1 = require("./dto/create-deck.dto");
-const users_1 = require("../users");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const deck_create_dto_1 = require("./dto/deck-create.dto");
+const deck_delete_dto_1 = require("./dto/deck-delete.dto");
+const deck_update_dto_1 = require("./dto/deck-update.dto");
+const decks_service_1 = require("./decks.service");
+const validator_pipe_1 = require("../pipes/validator.pipe");
 let DecksController = class DecksController {
+    constructor(deckService) {
+        this.deckService = deckService;
+    }
+    getAll(ctx) {
+        return this.deckService.getAllDecks(ctx.user.id);
+    }
     create(deckDto, ctx) {
-        console.log(ctx);
+        return this.deckService.createDeck(deckDto, ctx.user.id);
+    }
+    delete(deckDto) {
+    }
+    update(deckDto) {
     }
 };
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], DecksController.prototype, "getAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_deck_dto_1.CreateDeckDto, users_1.User]),
+    __metadata("design:paramtypes", [deck_create_dto_1.DeckCreateDto, Object]),
     __metadata("design:returntype", void 0)
 ], DecksController.prototype, "create", null);
+__decorate([
+    (0, common_1.Delete)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [deck_delete_dto_1.DeckDeleteDto]),
+    __metadata("design:returntype", void 0)
+], DecksController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Put)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [deck_update_dto_1.DeckUpdateDto]),
+    __metadata("design:returntype", void 0)
+], DecksController.prototype, "update", null);
 DecksController = __decorate([
-    (0, swagger_1.ApiTags)('Колоды'),
-    (0, common_1.Controller)('decks')
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.UsePipes)(validator_pipe_1.ValidatorPipe),
+    (0, common_1.Controller)('decks'),
+    __metadata("design:paramtypes", [decks_service_1.DecksService])
 ], DecksController);
 exports.DecksController = DecksController;
 //# sourceMappingURL=decks.controller.js.map

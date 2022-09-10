@@ -6,8 +6,8 @@ import { User } from "./users.model";
 import { UserRoles } from "../roles/user-roles.model";
 import { Role } from '../roles/roles.model';
 import { RolesModule } from "../roles/roles.module";
-import {AuthModule} from "../auth/auth.module";
-
+import { AuthModule } from "../auth/auth.module";
+import { Deck } from '../decks/decks.model'
 /**
  * @description
  * Модуль определяет конфиграцию на уровне модуля
@@ -20,7 +20,7 @@ import {AuthModule} from "../auth/auth.module";
     controllers: [UsersController],
     providers: [UsersService],
     imports: [
-        SequelizeModule.forFeature([User, Role, UserRoles]),
+        SequelizeModule.forFeature([User, Role, UserRoles, Deck]),
         /**Модуль можно импортировать в другой модуль но что бы воспользоваться сервисом нужно указать в imports: [] экспортируемый сервис*/
         RolesModule,
         forwardRef(() => AuthModule),
